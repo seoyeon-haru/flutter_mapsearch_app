@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mapsearch_app/ui/second/review_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,7 +10,8 @@ class _HomePageState extends State<HomePage> {
   TextEditingController textEditingController = TextEditingController();
 
   @override
-  void dispose() { // 위젯에서 화면이 없어질 때 호출 / 호출해주지 않으면 메모리에서 소거되지 않음
+  void dispose() {
+    // 위젯에서 화면이 없어질 때 호출 / 호출해주지 않으면 메모리에서 소거되지 않음
     textEditingController.dispose();
     super.dispose();
   }
@@ -46,7 +48,55 @@ class _HomePageState extends State<HomePage> {
                 })),
           ),
         ),
-        body: Text('HomePage'),
+        body: Padding(
+          padding: const EdgeInsets.all(20),
+          child: ListView.builder(
+            itemCount: 1,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ReviewPage();
+                  }));
+                },
+                child: Container(
+                  width: 50,
+                  height: 105,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Colors.grey,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('title',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20
+                        ),),
+                        SizedBox(height: 5),
+                        Text(
+                          'category',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          'roadAddress',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }
